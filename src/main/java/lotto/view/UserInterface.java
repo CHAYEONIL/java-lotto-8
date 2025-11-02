@@ -2,6 +2,9 @@ package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.Messages.Message;
+import lotto.utill.Lotto;
+import lotto.utill.Rank;
+import lotto.utill.YieldResult;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,5 +74,43 @@ public class UserInterface {
 
     public void printError(String message) {
         System.out.println(message);
+    }
+    public void printPurchasedLottos(List<Lotto> lottos) {
+        System.out.println();
+        System.out.printf(Message.PURCHASE_COUNT + "%n", lottos.size());
+        for (Lotto lotto : lottos) {
+            System.out.println(formatLottoNumbers(lotto));
+        }
+    }
+
+    private String formatLottoNumbers(Lotto lotto) {
+        return lotto.getSortedNumbers().stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
+
+    public void printResult(YieldResult result) {
+        System.out.println();
+        System.out.println(Message.WINNING_STATISTICS);
+        System.out.println(Message.STATISTICS_SEPARATOR);
+        printRankStatistics(result);
+        printProfitRate(result);
+    }
+
+    private void printRankStatistics(YieldResult result) {
+        Map<Rank, Integer> rankCounts = result.getRankCounts();
+        printRankCount(Rank.FIFTH, rankCounts.get(Rank.FIFTH));
+        printRankCount(Rank.FOURTH, rankCounts.get(Rank.FOURTH));
+        printRankCount(Rank.THIRD, rankCounts.get(Rank.THIRD));
+        printRankCount(Rank.SECOND, rankCounts.get(Rank.SECOND));
+        printRankCount(Rank.FIRST, rankCounts.get(Rank.FIRST));
+    }
+
+    private void printRankCount(Rank rank, int count) {
+        System.out.printf(Message.RANK_FORMAT + "%n", rank.getFormattedDescription(), count);
+    }
+
+    private void printProfitRate(YieldResult result) {
+        System.out.printf(Message.PROFIT_RATE_FORMAT + "%n", result.calculateProfitRate());
     }
 }
