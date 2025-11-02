@@ -10,4 +10,8 @@ public class Message {
     public static final String ERROR_LOTTO_SIZE = "[ERROR] 로또 번호는 6개여야 합니다.";
     public static final String ERROR_LOTTO_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
     public static final String ERROR_LOTTO_DUPLICATE = "[ERROR] 로또 번호는 중복되지 않아야 합니다.";
+
+    // 보너스 번호 관련 추가
+    public static final String ERROR_BONUS_RANGE = "[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.";
+    public static final String ERROR_BONUS_DUPLICATE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.";
 }
